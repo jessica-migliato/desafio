@@ -1,0 +1,37 @@
+<form [formGroup]="tituloForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Número do Título:</label>
+    <input formControlName="numeroTitulo" />
+  </div>
+  <div>
+    <label>Nome do Devedor:</label>
+    <input formControlName="nomeDevedor" />
+  </div>
+  <div>
+    <label>CPF do Devedor:</label>
+    <input formControlName="cpfDevedor" />
+  </div>
+  <div>
+    <label>% Juros:</label>
+    <input type="number" formControlName="percentualJuros" />
+  </div>
+  <div>
+    <label>% Multa:</label>
+    <input type="number" formControlName="percentualMulta" />
+  </div>
+  <div formArrayName="parcelas">
+    <h4>Parcelas</h4>
+    <button type="button" (click)="adicionarParcela()">Adicionar Parcela</button>
+    <div *ngFor="let parcela of parcelas.controls; let i = index" [formGroupName]="i" class="parcela">
+      <label>Parcela {{i+1}}</label>
+      <label>Número da parcela:</label>
+      <input type="number" formControlName="numeroParcela" placeholder="Número" />
+      <label>Data de Vencimento:</label>
+      <input type="date" formControlName="dataVencimento" placeholder="Vencimento" />
+      <label>Valor:</label>
+      <input type="number" formControlName="valor" placeholder="Valor" />
+      <button type="button" (click)="removerParcela(i)">Remover</button>
+    </div>
+  </div>
+  <button type="submit" [disabled]="!tituloForm.valid">Cadastrar</button>
+</form>

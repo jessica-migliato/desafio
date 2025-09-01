@@ -1,0 +1,47 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th>Número do Título</th>
+      <th>Nome do Devedor</th>
+      <th>Qtd Parcelas</th>
+      <th>Valor Original</th>
+      <th>Valor Atualizado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let titulo of titulos">
+      <td>{{ titulo.numeroTitulo }}</td>
+      <td>{{ titulo.nomeDevedor }}</td>
+      <td>{{ titulo.parcelas.length }}</td>
+      <td>{{ valorOriginal(titulo) | currency:'BRL' }}</td>
+      <td>{{ valorAtualizadoDetalhado(titulo) | currency:'BRL' }}</td>
+    </tr>
+    <tr *ngFor="let titulo of titulos">
+      <td colspan="5">
+        <b>Detalhamento das Parcelas:</b>
+        <table border="1" style="margin: 10px 0; width: 100%;">
+          <thead>
+            <tr>
+              <th>Parcela</th>
+              <th>Valor Original</th>
+              <th>Dias em Atraso</th>
+              <th>Multa</th>
+              <th>Juros</th>
+              <th>Valor Atualizado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of detalharParcelas(titulo)">
+              <td>{{ p.numeroParcela }}</td>
+              <td>{{ p.valor | currency:'BRL' }}</td>
+              <td>{{ p.diasAtraso }}</td>
+              <td>{{ p.multa | currency:'BRL' }}</td>
+              <td>{{ p.juros | currency:'BRL' }}</td>
+              <td>{{ p.valorAtualizado | currency:'BRL' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
