@@ -1,0 +1,4 @@
+bin/
+obj/
+MyApp.Tests/bin/
+MyApp.Tests/obj/
